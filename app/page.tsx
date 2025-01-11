@@ -24,8 +24,6 @@ export default function Home() {
                         progress > 0
                             ? `bg-gradient-to-r from-blue-500 to-blue-500 bg-[length:${progress}%_100%] bg-no-repeat `
                             : 'bg-gray-300'
-
-                        
                     }
                     `
                 }
