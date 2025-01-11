@@ -6,7 +6,7 @@ export default function Home() {
     const [numeroPasso, setNumeroPasso] = useState<number>(1);
 
     const handleClick = (calculo: number, text: string) => {
-        setProgress(progress + calculo);
+        setProgress((prevProgress) => prevProgress + calculo);
         if (text === 'avançar') {
             setNumeroPasso((prevPasso) => prevPasso + 1);
         } else if (text === 'voltar') {
@@ -19,23 +19,21 @@ export default function Home() {
             {/* Barra de progresso */}
             <div
                 className={
-                    'flex justify-center gap-28 items-center w-fit h-[6px] ' +
-                    `${
-                        progress > 0
-                            ? `bg-gradient-to-r from-blue-500 to-blue-500 bg-[length:${progress}%_100%] bg-no-repeat `
-                            : 'bg-gray-300'
-                    }
-                    `
+                    'flex justify-center gap-28 items-center w-fit h-[6px]'
                 }
+                style={{
+                    backgroundImage: `linear-gradient(to right, #3b82f6 ${progress}%, #e0e0e0 0%)`,
+
+                }}
             >
                 {[1, 2, 3, 4].map((numero) => {
                     return (
                         <div
-                            className={`rounded-full border-4 px-2 py-0 border-gray-300 bg-white 
+                            className={`rounded-full border-4 px-2 py-0 bg-white 
                                     ${
                                         numeroPasso >= numero
                                             ? 'border-blue-500'
-                                            : ''
+                                            : ' border-gray-300'
                                     }
                                 `}
                             key={numero}
@@ -45,6 +43,7 @@ export default function Home() {
                     );
                 })}
             </div>
+            {/* Avança ou retorna 33% do total da barra de progresso */}
             <div className="flex justify-center gap-4 mt-8">
                 <button
                     className={`bg-blue-400 py-2 px-8 text-white rounded-md disabled:bg-gray-400 disabled:text-gray-700`}
